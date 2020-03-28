@@ -1,18 +1,66 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="banner">
+      <div class="content">
+        <div class="banner-title">conduit</div>
+        <div class="banner-subtitle">A place to show your knowledge.</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <el-row class="main">
+        <ArticleList></ArticleList>
+        <TagList></TagList>
+      </el-row>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
-export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  import ArticleList from "@/components/ArticleList";
+  import TagList from "@/components/TagList";
+
+  export default {
+    name: 'Home',
+    components: {
+      ArticleList,
+      TagList
+    }
   }
-}
 </script>
+
+<style lang="scss" scoped>
+  .home {
+    position: relative;
+  }
+  .banner {
+    height: 170px;
+    background: #5CB85C;
+    box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.3), inset 0 -8px 8px -8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 30px;
+    min-width: 1110px;
+  }
+
+  .banner-title {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    font-weight: 700;
+    text-align: center;
+    font-size: 50px;
+  }
+
+  .banner-subtitle {
+    font-weight: 100;
+    font-size: 20px;
+  }
+
+  .main {
+    margin-top: 24px;
+  }
+
+</style>
