@@ -9,23 +9,49 @@
 
     <div class="content">
       <el-row class="main">
-        <ArticleList></ArticleList>
-        <TagList></TagList>
+        <ArticleList :articleList="articleList"></ArticleList>
+        <TagList :tagList="tagList"></TagList>
       </el-row>
     </div>
   </div>
 </template>
 
 <script>
+  import ApiService from "@/common/api.service";
+  import { TagsService, ArticlesService } from "@/common/api.service";
 
+  // 引入组件
   import ArticleList from "@/components/ArticleList";
   import TagList from "@/components/TagList";
 
   export default {
     name: 'Home',
+    data() {
+      return {
+        tagList: [],
+        articleList: []
+      }
+    },
     components: {
       ArticleList,
       TagList
+    },
+    methods: {
+      getTags() {
+        TagsService.get().then(data => {
+          this.tagList = data.data.tags;
+        })
+      },
+      getArticles() {
+        ArticlesService.query().then(data => {
+          console.log('data', data.data)
+          this.articleList = data.data.articles;
+        })
+      }
+    },
+    mounted() {
+      this.getTags();
+      this.getArticles();
     }
   }
 </script>

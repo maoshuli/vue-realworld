@@ -7,28 +7,35 @@
       <div class="feet-title-item"><i class="el-icon-cpu"></i> test</div>
     </div>
     <div class="article">
-      <div v-for="n in 10" class="article-item">
+      <div v-for="item in articleList" class="article-item">
         <!-- 用户信息 -->
         <div class="item-user">
           <div class="item-info">
             <a class="info-img" href="javascript:void(0)">
-              <img class="info-img-pic" src="" alt="">
+              <img class="info-img-pic" :src="item.author.image" alt="">
             </a>
 
             <div class="info-right">
-              <a href="javascript:void(0);" class="info-name">name</a>
-              <div class="info-date">March 28, 2020</div>
+              <a href="javascript:void(0);" class="info-name">{{item.author.username}}</a>
+              <div class="info-date">{{item.createdAt}}</div>
             </div>
           </div>
-          <div class="item-likes">likes{{n}}</div>
+          <div class="item-likes">likes {{item.favoritesCount}}</div>
         </div>
 
         <!-- 文章信息 -->
-        <a class="item-main">
-          <div class="item-title">awwmawwmawwmawwmawwmawwmawwmawwmawwmaww</div>
-          <div class="item-subtitle">nghia test your feed</div>
+        <a href="javascript:void(0);" class="item-main">
+          <div class="item-title">{{item.body}}</div>
+          <div class="item-subtitle">{{item.description}}</div>
           <div class="item-more">阅读更多...</div>
         </a>
+
+        <!-- 所属标签 -->
+        <div v-if="item.tagList.length > 0" class="tags">
+          <a href="javascript:void(1);" v-for="tag in item.tagList" class="tag-item">{{tag}}</a>
+        </div>
+
+
       </div>
     </div>
 
@@ -44,7 +51,12 @@
 
 <script>
   export default {
-    name: "ArticleList"
+    name: "ArticleList",
+    props: {
+      articleList: {
+        type: Array
+      }
+    }
   }
 </script>
 
@@ -145,6 +157,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    text-decoration: none;
+    color: inherit;
   }
 
   .item-title {
@@ -170,5 +184,29 @@
     font-size: 12px;
     color: #bbb;
     cursor: pointer;
+  }
+
+  .tags {
+    position: absolute;
+    right: 0;
+    bottom: 24px;
+    color: #aaa;
+    display: flex;
+  }
+
+  .tag-item {
+    display: block;
+    font-size: 12px;
+    border: 1px solid #eee;
+    height: 16px;
+    line-height: 16px;
+    padding: 0 3px;
+    border-radius: 3px;
+    margin-left: 7px;
+    color: inherit;
+    text-decoration: none;
+    &:first-child {
+      margin-left: 0;
+    }
   }
 </style>

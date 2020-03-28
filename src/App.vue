@@ -10,6 +10,11 @@
 
     export default {
         name: "App",
+        data() {
+            return {
+                user: {}
+            }
+        },
         components: {
             TheHeader
         }

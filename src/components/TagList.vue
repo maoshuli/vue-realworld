@@ -2,16 +2,24 @@
   <!-- tags -->
   <el-col class="tag" :span="6">
     <div class="tag-title">Popular Tags</div>
-    <div class="tag-list">
-      <el-tag class="tag-item" v-for="n in 100">test{{n}}</el-tag>
+    <div class="loading" v-if="tagList.length == 0">
+      <i class="el-icon-loading"></i>
+    </div>
 
+    <div v-else class="tag-list">
+      <el-tag class="tag-item" v-for="item in tagList">{{item}}</el-tag>
     </div>
   </el-col>
 </template>
 
 <script>
   export default {
-    name: "TagList"
+    name: "TagList",
+    props: {
+      tagList: {
+        type: Array
+      }
+    }
   }
 </script>
 
@@ -32,5 +40,9 @@
     &:hover {
       background-color: #b9ffb6;
     }
+  }
+
+  .loading {
+    text-align: center;
   }
 </style>
